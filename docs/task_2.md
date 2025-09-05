@@ -25,8 +25,8 @@ Each function takes a `request` as an argument and returns an `HttpResponse` obj
 
 
    ### o JSON response?
-        There are two simple ways to return a JSON response from a Django View. We can either use HttpResponse or JsonResponse classes
-        1. JSON response using HttpResponse:
+   There are two simple ways to return a JSON response from a Django View. We can either use HttpResponse or JsonResponse classes
+   1. JSON response using HttpResponse:
    ``` 
         import json
         from django.http import HttpResponse
@@ -41,7 +41,7 @@ Each function takes a `request` as an argument and returns an `HttpResponse` obj
             return response 
    ```
 
-        2. Using Django's JsonResponse Class:
+   2. Using Django's JsonResponse Class:
    ```
    from django.http import JsonResponse
 

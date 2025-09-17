@@ -1,0 +1,20 @@
+{% extends './base.html' %}
+
+{% block title %}{{dev.user_name}}'s profile{% endblock %}
+
+{% block content %}
+    <ul>
+        <li>Full name: {{dev.first_name}} {{dev.last_name}}</li>
+        <li>User name: {{dev.user_name}}</li>
+        <li>Skills:
+            <br>
+            <ul> 
+                {% for skill in skills %}
+                    <li>Tite: {{skill.title}}</li>
+                    <li>Description: {{skill.description}}</li>
+                    <br>
+                {% endfor %}
+            </ul>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends './base.html' %}
+
+{% block title %}Projects{% endblock %}
+
+{% block content %}
+
+    <h1> List of all projects </h1>
+    {% for project in projects %}
+        <div class="project_card">
+            <h3>Project title: {{project.title}}</h3>
+            <ul>
+                <li>Description: {{project.description}}</li>
+                <li>Developers: </li>
+                <ul>
+                    {% for dev in project.developers.all %}
+                        <li><a href="{% url 'developer_skills' dev.id %}">{{dev.user_name}}</a></li>
+                    {% endfor %}
+                </ul>
+            </ul>      
+        </div>
+        <br>
+    {% endfor %}
+
+{% endblock %}

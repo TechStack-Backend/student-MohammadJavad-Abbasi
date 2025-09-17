@@ -1,0 +1,17 @@
+{% extends './base.html' %}
+
+{% block title %} Add Skill {% endblock %}
+
+{% block content %}
+    
+    <h1>Add skills to a developer</h1>
+
+    <div class="form">
+        <form method="POST" autocomplete="off">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit">
+        </form>
+    </div>
+
+{% endblock%}

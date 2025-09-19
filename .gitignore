@@ -1,1 +1,4 @@
 .venv
+*.pyc
+prject2/db.sqlite3
+__pycache__/

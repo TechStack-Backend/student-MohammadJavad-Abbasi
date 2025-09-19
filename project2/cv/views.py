@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, Http404
+from django.contrib import messages
 
 developersList = [
         {
@@ -22,22 +23,27 @@ developersList = [
         },
     ]
 
+developersDict = {dev['username'] : dev for dev in developersList}
+
+
+
+
 def homepage(request):
     return render(request, 'cv/index.html')
+
 
 def developers(request):
     
     context = {'Developers' : developersList}
     return render(request, 'cv/developers.html', context)
 
+
 def developer_cv(request, name):
-    dev = next((d for d in developersList if d['username'] == name), None)
+    
+    dev = developersDict.get(name)
+    
     if not dev:
-        raise Http404("Developer not found")
+        messages.add_message(request, messages.ERROR, 'Developer not found!')
     
-    context = {'dev' : dev}
+    context = {'dev':dev}
     return render(request, 'cv/CVs.html', context)
-
-    
-
-    

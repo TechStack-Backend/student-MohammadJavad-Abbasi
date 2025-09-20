@@ -1,4 +1,5 @@
 .venv
+project3/.env
 *.pyc
 *.sqlite3
 __pycache__/

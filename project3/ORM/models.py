@@ -1,5 +1,4 @@
 from django.db import models
-from django.core.validators import MaxValueValidator, MinValueValidator
 
 # Create your models here.
 class Developer(models.Model):
@@ -21,5 +20,3 @@ class Skill(models.Model):
     developer = models.ForeignKey(Developer, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     description = models.TextField(max_length=1000)
-
-    

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
-from django.http import Http404, HttpResponse
-from .models import Developer, Project, Skill
+from .models import Developer, Project
 from .forms import DeveloperForm, ProjectForm, SkillForm
+from django.contrib import messages
 
 def homepage(request):
     return render(request, 'ORM/index.html')
@@ -16,14 +16,16 @@ def developers_list(request):
 
 def developer_skills(request, pk):
     
-    dev = Developer.objects.get(id = pk)
-    if dev:
-        skills = Skill.objects.all().filter(developer__id = pk)
+    try:
+        dev = Developer.objects.get(id = pk)
+    except Developer.DoesNotExist:
+        request.session['error_message'] = "User not found!"
+        return redirect('user_not_found')
 
-        context = {'dev' : dev, 'skills' : skills}
-        return render(request, 'ORM/skills.html', context)
+    skills = dev.skill_set.all()
 
-    raise Http404("Developer not found!")    
+    context = {'dev':dev, 'skills':skills}
+    return render(request, 'ORM/skills.html', context)
 
 
 def projects_list(request):
@@ -77,3 +79,6 @@ def add_skill(request):
     context = {'form':form}
     return render(request, 'ORM/add_skill.html', context)
     
+def user_not_found(request):
+    error = request.session.get('error_message', None)
+    return render(request, 'ORM/user_not_found.html', {'error_message':error})

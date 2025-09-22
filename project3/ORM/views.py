@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Developer, Project
 from .forms import DeveloperForm, ProjectForm, SkillForm
-from django.contrib import messages
 
 def homepage(request):
     return render(request, 'ORM/index.html')
@@ -74,7 +73,7 @@ def add_skill(request):
             
             skill = form.save()
             pk = skill.developer_id
-            return redirect(f'developers_list/{pk}')
+            return redirect('developer_skills', pk=pk)
         
     context = {'form':form}
     return render(request, 'ORM/add_skill.html', context)

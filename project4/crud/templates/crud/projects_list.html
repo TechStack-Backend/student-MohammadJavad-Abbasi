@@ -1,0 +1,50 @@
+{% extends './base.html' %}
+
+{% block title %}Projects{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="mb-5 text-primary text-center">List of All Projects</h1>
+
+    <div class="row gy-4">
+        {% for project in projects %}
+        <div class="col-md-6 col-lg-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="card-title text-primary fw-bold mb-0">
+                            {{ project.title }}
+                        </h5>
+                        <div>
+                            <a href="{% url 'update_project' project.id %}" class="text-warning me-2" title="Edit">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+                            <a href="{% url 'delete_project' project.id %}" class="text-danger" title="Delete">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <p class="card-text text-muted mt-2">{{ project.description }}</p>
+                    <hr>
+                    <p class="fw-semibold mb-2">Developers:</p>
+                    <ul class="list-unstyled mb-0">
+                        {% for dev in project.developers.all %}
+                        <li>
+                            <a href="{% url 'developer_skills' dev.id %}" class="link-primary text-decoration-none">
+                                {{ dev.user_name }}
+                            </a>
+                        </li>
+                        {% empty %}
+                        <li class="text-muted fst-italic">No developers assigned.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-muted text-center">No projects found.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

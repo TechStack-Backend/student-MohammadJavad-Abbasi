@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock  %}</title>     
+</head>
+<body>
+
+    <hr>
+    <a href="{% url 'homepage' %}">Home</a>
+    &nbsp;
+    <a href="{% url 'developers_list' %}">Developers</a>
+    &nbsp;
+    <a href="{% url 'projects_list' %}">Projects</a>
+    &nbsp;
+    <a href="{% url 'new_developer' %}">New developer</a>
+    &nbsp;
+    <a href="{% url 'new_project' %}">New project</a>
+    &nbsp;
+    <a href="{% url 'add_skill' %}">Add skill</a>
+    <hr>
+    {% block content %}
+        
+    {% endblock %}
+</body>
+</html>

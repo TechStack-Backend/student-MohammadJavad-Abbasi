@@ -1,5 +1,5 @@
 .venv
-project3/.env
+.env
 *.pyc
 *.sqlite3
 __pycache__/

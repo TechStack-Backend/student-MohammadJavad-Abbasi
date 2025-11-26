@@ -39,14 +39,14 @@ urlpatterns = [
             subject_template_name='crud/password_reset_subject.txt',
             success_url='/user/reset-password/done/'
         ),
-        name='user/password_reset'),
+        name='password_reset'),
 
     
     path('user/reset-password/done/',
         auth_views.PasswordResetDoneView.as_view(
             template_name='crud/password_reset_done.html'
         ),
-        name='user/password_reset_done'),
+        name='password_reset_done'),
 
     
     path('user/reset/<uidb64>/<token>/',

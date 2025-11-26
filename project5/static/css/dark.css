@@ -1,0 +1,62 @@
+.form-control,
+.form-select {
+    background-color: #313244 !important;
+    border: 1px solid #45475a !important;
+    color: #cdd6f4 !important;
+}
+
+.form-control:focus,
+.form-select:focus {
+    background-color: #313244 !important;
+    border-color: #89b4fa !important;
+    color: #cdd6f4 !important;
+    box-shadow: 0 0 0 0.2rem rgba(137, 180, 250, 0.25) !important;
+}
+
+.form-label,
+label {
+    color: #cdd6f4 !important;
+}
+
+.form-text {
+    color: #a6adc8 !important;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    accent-color: #89b4fa;
+}
+
+.btn-primary {
+    background-color: #89b4fa !important;
+    border-color: #89b4fa !important;
+    color: #1e1e2e !important;
+}
+
+.btn-primary:hover {
+    background-color: #74a0e0 !important;
+    border-color: #74a0e0 !important;
+}
+
+
+.card {
+    background-color: #2a2a3b !important;  
+    color: #cdd6f4 !important;
+    border: 1px solid #313244 !important;
+}
+
+.card .text-muted {
+    color: #a6adc8 !important;
+}
+
+.card-header {
+    background-color: #242434 !important;  
+    border-bottom: 1px solid #313244 !important;
+    color: #cdd6f4 !important;
+}
+
+.card-footer {
+    background-color: #242434 !important;
+    border-top: 1px solid #313244 !important;
+    color: #cdd6f4 !important;
+}

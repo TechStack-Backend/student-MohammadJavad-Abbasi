@@ -435,18 +435,19 @@ class Developer(models.Model):
 ```
 
 ### Q12: Should we extend user model or use one to one relationship? 
-
-if you want to add profile , avatar to the user use 1-1 
-
-if you wanna use email-based login , phone login, replace username use custome user model
-
 ### Q13:  Should we use Django default model without extending? 
+The best-practice option is creating a new User class inheriting from the AbstractUser or AbstractBaseUser and then adding the features you need to the class or create a 1:1 relationship between the new User class and the features you need. 
+If you want to add new features later in development , create the new User inheriting from django's abstract user classes but leave it as is.
 
-It depends
+```py
+class newUserModel(AbstractUser):
+    pass
+```
 
-Django's default User model provides most of the things that a simple crud app needs so most of the times it's better to stick with the default model
-
-However if the user model needs more info or/and the authentication method is different , we need to use custom model.
+For using these custome classes as the User model you also need to add your class in the project settings.py 
+```py
+   AUTH_USER_MODEL = 'accounts.CustomUser'
+```
 
 ### Q14:
 

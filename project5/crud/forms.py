@@ -59,21 +59,3 @@ class ProjectForm(ModelForm):
         return cleaned_data 
     
 
-class UserForm(UserCreationForm):
-    class Meta:
-        model = User
-        fields = ['username', 'email', 'password1', 'password2']
-
-class UserUpdateForm(ModelForm):
-    class Meta:
-        model = User
-        fields = ['username', 'email']
-
-class LoginForm(AuthenticationForm):
-    username = forms.CharField(widget=widgets.TextInput)
-    password = forms.CharField(widget=widgets.PasswordInput)
-    
-class UserProfileForm(ModelForm):
-    class Meta:
-        model = models.UserProfile
-        fields = ['first_name', 'last_name', 'bio', 'avatar']

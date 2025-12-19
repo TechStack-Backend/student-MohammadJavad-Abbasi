@@ -1,0 +1,135 @@
+{% extends 'crud/base.html' %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2 class="mb-4">Developer Dashboard</h2>
+
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="card shadow-sm h-100">
+                <div class="card-body text-center">
+
+                    {% if profile and profile.avatar %}
+                        <img src="{{ profile.avatar.url }}"
+                             class="rounded-circle mb-3"
+                             style="width:120px;height:120px;object-fit:cover;"
+                             alt="Profile avatar">
+                    {% endif %}
+
+                    <h4>{{ request.user.username }}</h4>
+                    <p class="text-muted mb-2">{{ request.user.email }}</p>
+
+                    <hr>
+
+                    <p>
+                        <strong>First name:</strong>
+                        {{ profile.first_name|default:"—" }}
+                    </p>
+
+                    <p>
+                        <strong>Last name:</strong>
+                        {{ profile.last_name|default:"—" }}
+                    </p>
+
+                    <p>
+                        <strong>Bio:</strong><br>
+                        {{ profile.bio|default:"No bio provided." }}
+                    </p>
+
+                    {% if request.user == profile.user or perms.accounts.change_userprofile %}
+                        <a href="{% url 'update_profile' %}"
+                           class="btn btn-primary w-100 mt-3">
+                            Edit User Info
+                        </a>
+                    {% else %}
+                        <p class="text-danger mt-3">
+                            You do not have permission to edit this profile.
+                        </p>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card shadow-sm h-100">
+                <div class="card-body d-flex flex-column">
+
+                    <h5 class="mb-3">Developer Profile</h5>
+                    <hr>
+
+                    {% if developer %}
+
+                        <p class="mb-1"><strong>Age</strong></p>
+                        <p class="text-muted">
+                            {{ developer.age|default:"No set." }}
+                        </p>
+
+                        <p class="mb-1"><strong>Years Of Experience</strong></p>
+                        <p class="text-muted">
+                            {{ developer.years_of_experience|default:"Not set." }}
+                        </p>
+
+                        <p class="mb-1">
+                            <strong>Availability:</strong>
+                            {{ developer.availability|default:"Not specified" }}
+                        </p>
+
+                        <div class="mt-auto">
+
+                            {% if request.user == developer.user or perms.crud.change_developer %}
+                                <a href="{% url 'update_developer' developer.pk %}"
+                                   class="btn btn-warning w-100 mt-3">
+                                    Edit Developer Info
+                                </a>
+                            {% else %}
+                                <p class="text-danger text-center mt-3">
+                                    You do not have permission to edit developer info.
+                                </p>
+                            {% endif %}
+
+                            <a href="{% url 'developer_skills' developer.id %}"
+                               class="btn btn-outline-secondary w-100 mt-2">
+                                View Skills
+                            </a>
+
+                        </div>
+
+                    {% else %}
+                        <p class="text-muted text-center">
+                            Developer profile not found.
+                        </p>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="card border-danger mt-5">
+        <div class="card-body">
+
+            <h5 class="text-danger mb-2">Be Careful</h5>
+
+            <p class="text-muted mb-3">
+                Deleting your account is permanent and cannot be undone.
+            </p>
+
+            <a href="{% url 'confirm_delete_account' %}"
+               class="btn btn-danger">
+                Delete My Account
+            </a>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

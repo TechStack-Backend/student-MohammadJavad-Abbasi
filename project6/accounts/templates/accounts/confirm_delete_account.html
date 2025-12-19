@@ -1,0 +1,29 @@
+{% extends "crud/base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+    <div class="card border-danger">
+        <div class="card-body text-center">
+
+            <h4 class="text-danger">Delete Account</h4>
+            <p>
+                This action is permanent.<br>
+                Developer profile, skills and data will be deleted.
+            </p>
+
+            {% if target_user == request.user %}
+                <form method="post" action="{% url 'delete_account' %}">
+            {% else %}
+                <form method="post" action="{% url 'delete_user' target_user.pk %}">
+            {% endif %}
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">
+                    Delete
+                </button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

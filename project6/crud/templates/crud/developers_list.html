@@ -1,0 +1,84 @@
+{% extends './base.html' %}
+
+{% block title %}Developers{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="mb-5 text-primary text-center">List of All Developers</h1>
+
+    <div class="row gy-4">
+        {% for developer in Developers %}
+        <div class="col-md-6 col-lg-4">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-center align-items-center mb-3">
+
+                        <div class="d-flex align-items-center gap-3">
+
+                            <img
+                                src="{{ developer.user.userprofile.avatar.url }}"
+                                alt="{{ developer.user.username }} avatar"
+                                class="rounded-circle"
+                                width="50"
+                                height="50"
+                                style="object-fit: cover;"
+                            >
+
+                            <div>
+                                <h5 class="mb-0 text-primary fw-semibold">
+                                    {{ developer.user.username }}
+                                </h5>
+                                <small class="text-muted">
+                                    {{ developer.user.email }}
+                                </small>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <ul class="list-unstyled mb-4">
+                        <li>
+                            <strong>Full name:</strong>
+                            {{ developer.user.userprofile.first_name|default:"Not set" }}
+                            {{ developer.user.userprofile.last_name|default:"" }}
+                        </li>
+
+                        <li>
+                            <strong>Availability:</strong>
+                            <span class="badge bg-success">
+                                {{ developer.availability|default:"Not set" }}
+                            </span>
+                        </li>
+                        <li>
+                            <strong>Exp:</strong>
+                            <span>
+                                {{ developer.years_of_experience|default:"Not set" }} years
+                            </span>
+                        </li>
+                    </ul>
+
+                    <div class="d-grid gap-2">
+                        <a href="{% url 'developer_skills' developer.id %}"
+                           class="btn btn-sm btn-outline-primary">
+                            View Skills
+                        </a>
+                        {% if perms.accounts.change_userprofile or request.user == developer.user %}
+                            <a href="{% url 'user_profile' developer.user.id %}"
+                                class="btn btn-sm btn-outline-warning">
+                                View Profile
+                            </a>    
+                        {% endif %}
+                        
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {% empty %}
+            <p class="text-muted text-center">No developers found.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

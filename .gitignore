@@ -1,5 +1,116 @@
-.venv
-.env
+# -------------------------
+# Python
+# -------------------------
 *.pyc
-*.sqlite3
+*.pyo
+*.pyd
 __pycache__/
+*.so
+
+# Byte-compiled, cache, temp
+*.cache
+*.log
+*.pot
+*.mo
+*.pid
+*.seed
+*.cover
+.coverage
+coverage.xml
+htmlcov/
+.cache/
+pytest_cache/
+*.prof
+
+# -------------------------
+# Virtual environments
+# -------------------------
+.venv/
+venv/
+env/
+ENV/
+
+# -------------------------
+# Environment variables
+# -------------------------
+.env
+*.env
+
+# -------------------------
+# Django
+# -------------------------
+*.sqlite3
+db.sqlite3
+media/
+staticfiles/
+static_root/
+local_settings.py
+settings_local.py
+
+# Django logs
+*.log
+
+# -------------------------
+# Editor / IDE
+# -------------------------
+
+# VSCode
+.vscode/
+
+# PyCharm
+.idea/
+*.iml
+
+# -------------------------
+# OS files
+# -------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# -------------------------
+# Git
+# -------------------------
+*.orig
+*.rej
+
+# -------------------------
+# Node (if using for frontend builds)
+# -------------------------
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+dist/
+build/
+
+# -------------------------
+# Python packaging
+# -------------------------
+*.egg
+*.egg-info/
+.eggs/
+MANIFEST
+
+# -------------------------
+# Migrations (optional)
+# Uncomment if you don't want auto migrations in git
+# */migrations/*
+
+# -------------------------
+# MyPy / Pylint / Ruff / Black
+# -------------------------
+.mypy_cache/
+.dmypy.json
+ruff_cache/
+.pyre/
+.pytype/
+.pytest_cache/
+.cache/
+
+# -------------------------
+# Misc
+# -------------------------
+scrapy.cfg
+pip-log.txt
+pip-wheel-metadata/

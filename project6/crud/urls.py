@@ -21,9 +21,6 @@ urlpatterns = [
     path('projects/create/', views.NewProject.as_view(), name='new_project'),
     path('projects/<int:pk>/update/', views.UpdateProject.as_view(), name='update_project'),
     path('projects/<int:pk>/delete/', views.DeleteProject.as_view(), name='delete_project'),
-    path('project/<int:pk>/approve/', views.approve_project, name='approve_project')
-
-    #path('error/user-not-found/', views.user_not_found, name='user_not_found'),
-
+    path('projects/<int:pk>/approve/', views.approve_project, name='approve_project')
 
 ]

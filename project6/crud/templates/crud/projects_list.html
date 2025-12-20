@@ -31,63 +31,60 @@
                             </p>
                         </div>
 
-                            {% if not user.groups.all|length == 1 or user.groups.first.name != "Developer" %}
-                                
-                                <div class="dropdown">
-                                    <button class="btn btn-sm btn-outline-secondary border-0 bg-transparent p-0"
-                                            type="button"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false">
-                                        <i class="bi bi-three-dots-vertical"></i>
-                                    </button>
+                        {% if perms.crud.change_project or project.user == user %}
+                            <div class="dropdown">
+                                <button class="btn btn-sm btn-outline-secondary border-0 bg-transparent p-0"
+                                        type="button"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                    <i class="bi bi-three-dots-vertical"></i>
+                                </button>
+        
+                                <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+                                    
+                                    {% if perms.crud.change_project or project.user == user %}
+                                        <li>
+                                            <a class="dropdown-item d-flex align-items-center"
+                                            href="{% url 'update_project' project.id %}">
+                                                <i class="bi bi-pencil-square text-warning me-2"></i>
+                                                Edit
+                                            </a>
+                                        </li>
+                                    {% endif %}
 
-                                    <ul class="dropdown-menu dropdown-menu-end shadow-sm">
-                                        
-                                        {% if perms.crud.change_project %}
-                                            <li>
-                                                <a class="dropdown-item d-flex align-items-center"
-                                                href="{% url 'update_project' project.id %}">
-                                                    <i class="bi bi-pencil-square text-warning me-2"></i>
-                                                    Edit
-                                                </a>
-                                            </li>
-                                        {% endif %}
+                                    {% if perms.crud.approve_project %}
+                                        <li>
+                                            <form method="post"
+                                                action="{% url 'approve_project' project.pk %}">
+                                                {% csrf_token %}
+                                                <button type="submit"
+                                                        class="dropdown-item d-flex align-items-center">
+                                                    {% if project.is_approved %}
+                                                        <i class="bi bi-x-circle text-warning me-2"></i>
+                                                        Unapprove
+                                                    {% else %}
+                                                        <i class="bi bi-check-circle text-success me-2"></i>
+                                                        Approve
+                                                    {% endif %}
+                                                </button>
+                                            </form>
+                                        </li>
+                                    {% endif %}
 
-                                        {% if perms.crud.approve_project %}
-                                            <li>
-                                                <form method="post"
-                                                    action="{% url 'approve_project' project.pk %}">
-                                                    {% csrf_token %}
-                                                    <button type="submit"
-                                                            class="dropdown-item d-flex align-items-center">
-                                                        {% if project.is_approved %}
-                                                            <i class="bi bi-x-circle text-warning me-2"></i>
-                                                            Unapprove
-                                                        {% else %}
-                                                            <i class="bi bi-check-circle text-success me-2"></i>
-                                                            Approve
-                                                        {% endif %}
-                                                    </button>
-                                                </form>
-                                            </li>
-                                        {% endif %}
-
-                                        {% if perms.crud.delete_project %}
-                                            <li><hr class="dropdown-divider"></li>
-                                            <li>
-                                                <a class="dropdown-item d-flex align-items-center text-danger"
-                                                href="{% url 'delete_project' project.id %}">
-                                                    <i class="bi bi-trash me-2"></i>
-                                                    Delete
-                                                </a>
-                                            </li>
-                                        {% endif %}
-
-                                    </ul>
-                                </div>
-                            {% endif %}
-
-                        </div>
+                                    {% if perms.crud.delete_project or project.user == user %}
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li>
+                                            <a class="dropdown-item d-flex align-items-center text-danger"
+                                            href="{% url 'delete_project' project.id %}">
+                                                <i class="bi bi-trash me-2"></i>
+                                                Delete
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                    </div>
 
                     
 

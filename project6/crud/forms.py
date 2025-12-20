@@ -15,7 +15,7 @@ class DeveloperForm(ModelForm):
     def clean_age(self):
         age = self.cleaned_data.get('age')
         
-        if age < 18:
+        if age is not None and age < 18:
             raise forms.ValidationError("Age must be 18 or older.")
         
         return age

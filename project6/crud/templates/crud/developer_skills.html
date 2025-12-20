@@ -1,0 +1,96 @@
+{% extends './base.html' %}
+
+{% block title %}{{ dev.user.username }}'s Skills{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+
+    <h1 class="mb-4 text-primary">
+        {{ dev.user.username }}’s Skills
+    </h1>
+
+    <!-- Developer Info -->
+    <div class="card border-0 shadow-sm mb-4 bg-light">
+        <div class="card-body">
+            <h5 class="card-title">Developer Info</h5>
+            <ul class="list-unstyled mb-0">
+                <li>
+                    <strong>Username:</strong>
+                    {{ dev.user.username }}
+                </li>
+                <li>
+                    <strong>Email:</strong>
+                    {{ dev.user.email }}
+                </li>
+                <li>
+                    <strong>Years of experience:</strong>
+                    {{ dev.years_of_experience }}
+                </li>
+                <li>
+                    <strong>Status: </strong>
+                    {{ dev.availability }}
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    {% if skills %}
+        <h5 class="mb-3 text-secondary">Skills</h5>
+
+        <div class="row gy-3">
+            {% for skill in skills %}
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h6 class="card-title text-primary fw-bold mb-0">
+                                {{ skill.title }}
+                            </h6>
+
+                            {% if perms.crud.change_skill or skill.developer.user == request.user %}
+                            <div>
+                                <a href="{% url 'update_skill' skill.id %}"
+                                   class="text-warning me-2"
+                                   title="Edit">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+
+                                {% if perms.crud.delete_skill or skill.developer.user == request.user %}
+                                <a href="{% url 'delete_skill' skill.id %}"
+                                   class="text-danger"
+                                   title="Delete">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                                {% endif %}
+                            </div>
+                            {% endif %}
+                        </div>
+
+                        <p class="card-text text-muted">
+                            {{ skill.description }}
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-muted fst-italic">
+            No skills registered for this developer.
+        </p>
+    {% endif %}
+
+    <!-- Add New Skill Button -->
+    {% if perms.crud.add_skill or dev.user == request.user %}
+        <div class="text-center mt-4">
+            <a href="{% url 'add_skill_dev' dev.id %}"
+            class="btn btn-primary">
+                + Add New Skill
+            </a>
+        </div>
+    {% endif %}
+
+</div>
+{% endblock %}
